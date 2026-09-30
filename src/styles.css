@@ -1,0 +1,263 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --font-sans: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+
+  --color-bg: #f3eee4;
+  --color-surface: #faf6ee;
+  --color-sunken: #ebe4d6;
+  --color-fg: #1a1612;
+  --color-muted: #5c564e;
+  --color-subtle: #7a7368;
+  --color-border: #d4cbb8;
+  --color-border-strong: #b9ae98;
+  --color-primary: #2c4a3e;
+  --color-primary-fg: #faf6ee;
+  --color-primary-hover: #243d34;
+  --color-walnut: #6b5344;
+  --color-board-dark: #7a5c49;
+  --color-board-light: #e4d5b8;
+  --color-win: #2c4a3e;
+  --color-loss: #8f3d32;
+  --color-draw: #6b6560;
+  --color-ring: #2c4a3e;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.15rem;
+  --radius-xl: 1.65rem;
+  --radius-2xl: 2rem;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body,
+  #app {
+    min-height: 100%;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+
+  input[type="date"] {
+    color-scheme: light;
+  }
+
+  .board-stripe {
+    height: 0.5rem;
+    width: 100%;
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--color-board-dark) 0 16px,
+      var(--color-board-light) 16px 32px
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  :root {
+    background: white;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  a[href]::after {
+    content: none !important;
+  }
+
+  @page {
+    size: letter;
+    margin: 0.45in;
+  }
+}
+
+.table-card-qr svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.table-card {
+  box-sizing: border-box;
+  width: 5in;
+  height: 3in;
+  overflow: hidden;
+  border: 1px dashed var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-fg);
+  display: flex;
+  flex-direction: column;
+}
+
+.table-card-stripe {
+  height: 0.18in;
+  width: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-board-dark) 0 0.22in,
+    var(--color-board-light) 0.22in 0.44in
+  );
+}
+
+.table-card-body {
+  flex: 1;
+  display: flex;
+  gap: 0.18in;
+  padding: 0.18in 0.22in 0.16in;
+  min-height: 0;
+}
+
+.table-card-copy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.table-card-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.12in;
+}
+
+.table-card-mark {
+  width: 0.48in;
+  height: 0.48in;
+}
+
+.table-card-kicker {
+  margin: 0;
+  font-size: 9pt;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-walnut);
+}
+
+.table-card-title {
+  margin: 0.02in 0 0;
+  font-family: var(--font-display);
+  font-size: 16pt;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.table-card-lead {
+  margin: 0.12in 0 0;
+  font-size: 14pt;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.table-card-note {
+  margin: 0.08in 0 0;
+  font-size: 11pt;
+  color: var(--color-muted);
+}
+
+.table-card-scan {
+  width: 1.7in;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.06in;
+}
+
+.table-card-qr {
+  width: 1.55in;
+  height: 1.55in;
+}
+
+.table-card-url {
+  margin: 0;
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--color-fg);
+}
+
+.table-card-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25in;
+  align-items: center;
+}
+
+@media print {
+  body:has(.table-card-sheet) {
+    background: white;
+  }
+
+  body:has(.table-card-sheet) main {
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .table-card-sheet {
+    gap: 0 !important;
+  }
+
+  .table-card-stack {
+    gap: 0.35in;
+    align-items: center;
+  }
+
+  .table-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
